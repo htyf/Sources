@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 
+		以package作为一个整体
+		name:自定义的名字
+		namespace:访问时的虚拟路径
+		extends:必须这么写struts-default
+	 -->
+	<package name="user" namespace="/user" extends="struts-default">
+		<!-- 
+			name:访问的url
+			class：编写好的Action类
+			method：action类中调用的方法
+		 -->
+		<action name="user_login" class="cn.oracle.oaec.struts.UserAction" method="login">
+			<!-- 
+				name:是UserAction类中login方法返回的值
+				type:默认是转发（不写的情况也是转发）
+				标签中文本：跳转的页面
+				
+			 -->
+			<result name="ok" type="dispatcher">/index.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+	</package>
+</struts>

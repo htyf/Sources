@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+	
+<hibernate-configuration>
+	<!-- 一个会话工厂对应一个数据库连接 -->
+	<session-factory>
+		<!-- 必须配置的属性：4个数据连接，1个数据库方言 
+		
+		hibernate.dialect org.hibernate.dialect.MySQLDialect
+		hibernate.dialect org.hibernate.dialect.MySQLInnoDBDialect
+		hibernate.dialect org.hibernate.dialect.MySQLMyISAMDialect
+		
+		hibernate.connection.driver_class com.mysql.jdbc.Driver
+		
+		如果ip地址是localhost并且端口号是3306 可以默认不写
+		
+		hibernate.connection.url jdbc:mysql:///test
+		hibernate.connection.username gavin
+		hibernate.connection.password
+		-->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///hibernate</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+		
+		<!-- 可选的配置 -->
+		<!-- 
+			自动创建表 
+			
+			hibernate.hbm2ddl.auto create-drop  先删除再创建再删除
+			hibernate.hbm2ddl.auto create	先删除再创建
+			hibernate.hbm2ddl.auto update	第一次创建，之后不创建，直接更新数据
+			hibernate.hbm2ddl.auto validate	
+		-->
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		
+		<!-- 
+			显示sql语句 
+			hibernate.show_sql true
+		-->
+		<property name="hibernate.show_sql">true</property>
+		<!--
+			 格式化sql
+			hibernate.format_sql true
+		 -->
+		<property name="hibernate.format_sql">true</property>
+		
+		<!-- 把session绑定到当前线程 -->
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		
+		<!-- 加载的外部映射配置文件 -->
+		<!-- <mapping resource="cn/oracel/oaec/entity/Dept.hbm.xml"/> -->
+		<mapping resource="cn/oracel/oaec/entity/Emp.hbm.xml"/>
+		<mapping resource="cn/oracel/oaec/entity/Privilege.hbm.xml"/>
+		
+		
+	</session-factory>
+</hibernate-configuration>

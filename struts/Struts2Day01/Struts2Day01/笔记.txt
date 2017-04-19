@@ -1,0 +1,29 @@
+1.项目的配置
+ 	a.配置tomcat
+ 	b.创建项目（选 Target RunTime   ApatchTomcat7.0）
+ 	c.复制项目文件到WebContent目录下
+ 		a.jstl包需要导入
+ 
+2.struts2环境的搭建
+	a.导入jar包（13基础jar包）
+	b.创建Action（详细见UserAction类）
+	c.编写struts.xml配置文件，并放置在src目录下
+	d.在web.xml文件中配置struts2核心过滤器（StrutsPrepareAndExecuteFilter）
+	
+3.几个小点
+	404：action的请求路径需要加上项目名称
+	500：在action标签中配置method方法
+	
+4.strust2的加载顺序
+	a.启动tmocat
+	b.加载web.xml
+	c.加载<filter>struts</filter>
+	d.加载struts-default.xml,struts-plugin.xml,struts.xml
+	
+5.struts配置详解见（struts.xml文件）
+
+6.页面中请求路径的写法
+	a.页面一律改成jsp
+	b.${pageContext.request.contextPath}获取项目名
+	c.从新拼接请求路径
+	

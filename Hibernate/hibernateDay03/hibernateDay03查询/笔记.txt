@@ -1,0 +1,32 @@
+关联映射
+
+1.一对多
+2.多对多
+
+cascade 级联操作
+none			       默认没有 
+★★★★★★★★★★★★★★★★★★★★★
+save-update		      保存或更新
+delete			       删除
+all				      保存、更新、删除
+★★★★★★★★★★★★★★★★★★★★★
+delete-orphan	      孤儿删除
+all-delete-orphan 保存、更新、删除、孤儿删除
+
+
+inverse 外键维护设置
+默认情况都是false，就是维护外键
+true就是放弃维护
+
+
+cascader 做保存或更新或删除时有用
+
+inverse 与外键有关
+
+★★★★★★★★★★★★★★★★★★★★★
+	在<many-to-one>里面配置  cascade属性      
+	在<set>里面配置 inverse="true"
+★★★★★★★★★★★★★★★★★★★★★
+
+
+

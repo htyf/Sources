@@ -1,0 +1,16 @@
+总结一对多
+一般我们都是在一的一方去维护外键并且在一的一方去做关联操作
+多的一方放弃维护外键，且不做关联操作
+
+
+查询
+1.唯一标示列查询OID
+	session.get(xxx.class,1)
+2.对象导航查询
+	Dept dept = session.get(Dept.class, 1);
+	Set<Emp> emps = dept.getEmps();
+3.hql查询
+	
+4.qbc查询
+
+5.sql查询

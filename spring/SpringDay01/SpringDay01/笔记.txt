@@ -1,0 +1,56 @@
+spring
+1.ioc
+	控制反转
+	
+	引入包
+	层次结构
+	spring-framework-4.2.4.RELEASE-dist
+		spring-framework-4.2.4.RELEASE
+			libs
+				1.beans
+				2.context
+				3.core
+				4.expression
+	
+	层次结构
+	spring-framework-3.0.2.RELEASE-dependencies
+		org.apache.commons
+			com.springsource.org.apache.commons.logging\1.1.1
+				5.com.springsource.org.apache.commons.logging-1.1.1.jar
+	
+	spring-framework-3.0.2.RELEASE-dependencies
+		org.apache.log4j
+			com.springsource.org.apache.log4j\1.2.15
+				6.com.springsource.org.apache.log4j-1.2.15.jar
+				
+applicationContext.xml的dtd约束配置
+	spring-framework-4.2.4.RELEASE-dist
+		spring-framework-4.2.4.RELEASE
+			docs
+				spring-framework-reference
+					html	
+						xsd-configuration.html
+						拉到最下面
+复制如下代码
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="foo" class="x.y.Foo">
+        <meta key="cacheName" value="foo"/>
+        <property name="name" value="Rick"/>
+    </bean>
+
+</beans>	
+
+	
+				
+				
+				
+				
+				
+				
+2.di
+	依赖注入
+	

@@ -1,0 +1,96 @@
+Aop
+1.导入jar包
+
+2.编写applicationContext.xml文件
+
+3.编写具体类
+
+4.测试
+spring支持junit测试
+	1.导入支持的jar包
+	spring-framework-4.2.4.RELEASE-dist
+		spring-framework-4.2.4.RELEASE
+			libs
+				spring-test-4.2.4.RELEASE.jar
+				
+	2.添加注解
+	@RunWith(SpringJUnit4ClassRunner.class)
+	@ContextConfiguration("classpath:applicationContext.xml")
+	
+	
+详细讲解表达式
+execution(public void cn.oracle.oaec.service.impl.UserServiceImpl.save( ))
+
+访问权限 public  可以省略不写
+方法的返回类型   void 如果想更通用一些    写    *
+包名    	cn.oracle.oaec.service.impl  包名可以用通配符 * 代替
+		*.*.*.*.impl 但是不能只写一个 *，匹配不了
+		如果想通用    *..*
+类名    UserServiceImpl  可以使用通配符  *
+		User*
+		*ServiceImpl
+注意：类名后面一定要加上  点
+方法名  	save 可以使用通配符  *
+		例子:saveUser()
+		例子:saveCustomer()
+			save*()
+		如果想通用  *
+参数  如果有一个参数   *
+	如果两个参数  *,*
+	如果想通用   ..
+	
+	通用的标准写法
+	execution( * *..*.*ServiceImpl.*(..))
+	前提是命名要规范
+
+增强/通知
+
+before	在方法之前
+after	在方法之后，但是如果程序出项异常，那么增强方法也会执行
+after-returnning 在方法之后 ,但是如果程序出现异常，不会执行增强方法
+after-throwing 方法出现异常之后执行增强方法
+around	方法的前后去执行
+		public void transaction(ProceedingJoinPoint joinPoint){
+		try {
+			System.out.println("开启事务...");
+			/*
+			 * Session s=hiernate.getCurrentSession();
+			 * Transaction tr=s.begingTransaction();
+			 */
+			//就等同于调用cn.oracle.oaec.service.impl.UserServiceImpl.save();
+			
+			joinPoint.proceed();
+			
+			System.out.println("提交事务...");
+			
+			/*
+			 * tr.commit();
+			 */
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			/*
+			 * 日志
+			 * tr.rollback();
+			 */
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

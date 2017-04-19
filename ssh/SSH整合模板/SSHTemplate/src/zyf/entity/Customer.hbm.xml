@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	
+	<class name="zyf.entity.Customer" table="cst_customer" lazy="true">
+		<id name="custId" column="cust_id">
+			<generator class="uuid"/>
+		</id>
+		
+		<property name="custName"/>
+		<property name="custLevel"/>
+		<property name="custSource"/>
+		<property name="custLinkman"/>
+		<property name="custPhone"/>
+		<property name="custMobile"/>
+		<property name="custAddress"/>
+		<property name="custZip"/>
+		<property name="custFax"/>
+		<property name="custWebsite"/>
+		
+	</class>
+	
+</hibernate-mapping>    

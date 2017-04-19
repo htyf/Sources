@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+
+	<class name="cn.oracel.oaec.entity.Dept" table="t_dept">
+		<id name="did" column="did">
+			<generator class="native"></generator>
+		</id>
+		<property name="dname"/>
+		
+		<set name="emps" inverse="true" cascade="save-update">
+			<key column="eid"></key>
+			<one-to-many class="cn.oracel.oaec.entity.Emp"/>
+		</set>
+	</class>
+
+</hibernate-mapping>

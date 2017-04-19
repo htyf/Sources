@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+
+	<class name="cn.oracel.oaec.entity.Privilege" table="t_pri">
+		<id name="pid" column="pid">
+			<generator class="native"></generator>
+		</id>
+		<property name="pname"/>
+		
+		<!-- 
+			name:集合的属性名
+			table：中间表的表名
+			key中的column引用当前表中主键的外键名
+			class:集合中泛型的类型名
+			many-to-many中的column中间表中应用另外一张表中主键的外键名
+		 -->
+		<set name="emps" table="emp_pri">
+			<key column="pri_id"></key>
+			<many-to-many class="cn.oracel.oaec.entity.Emp" column="emp_id"/>
+		</set>
+		
+		
+	</class>
+
+</hibernate-mapping>

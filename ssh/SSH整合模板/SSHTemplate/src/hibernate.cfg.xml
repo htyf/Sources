@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+	
+<hibernate-configuration>
+	
+	<!-- 整合到spring中对应LocalSessionFactoryBean -->
+	<session-factory>
+		<!-- 
+			使用数据源整合到spring中
+			建议使用c3p0  com.mchange.v2.c3p0.ComboPooledDataSource
+			c3p0的四大属性
+				driverClass
+				jdbcUrl
+				user
+				password
+		 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///hibernate_day04</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		
+		
+		<!-- 
+			hibernate特有的一些属性
+			在spring整合时对应LocalSessionFactoryBean类里面的hibernateProperties属性
+		 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		
+		<!--
+			 映射配置文件
+			 在spring整合时对应LocalSessionFactoryBean类里面的mappingResources属性
+		 -->
+		<mapping resource="com/itheima/domain/Customer.hbm.xml"/>
+	</session-factory>
+	
+</hibernate-configuration>	

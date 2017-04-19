@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- dtd约束 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="userDao1" class="cn.oracle.oaec.dao.UserDaoImpl"></bean>
+   <bean id="userDao" class="cn.oracle.oaec.dao.UserDaoImplByHibernate"></bean>
+	
+   <bean id="userService" class="cn.oracle.oaec.sersvicec.UserServiceImpl">
+   	<!-- 
+   		注入dao 
+   		1.在servie层创建一个属性，类型是UserDaoImplByHibernate
+   		2.提供set方法
+   		3.注入
+   			name:属性名
+   			ref:bean 的 id
+   	-->
+   		<property name="dao" ref="userDao1"></property>
+   </bean>
+
+</beans>

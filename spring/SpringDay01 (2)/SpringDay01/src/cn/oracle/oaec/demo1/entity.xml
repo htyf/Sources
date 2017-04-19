@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+		id:名字（名字中不能有特殊符号，它要遵循我们的命名规则）
+		name:它也是一个名字（他可以有特殊符号，一般在struts1的框架中常见
+			   因为strust1中的action请求要求是“/useraction”）
+			 这个属性现在一般都不用了，只有老的系统中你能看到
+		class：类的全路径名称
+		init-method：初始化方法，在对象创建之前调用的
+		destroy-method：销毁方法，在对象销毁之前调用的
+		scope：实例的作用范围
+			singlton（默认值，就是说容器创建的这个对象是单例的）
+			prototype（多例）
+			request（就是在请求的作用域范围内有效，出了这个作用域，对象就销毁了）
+			session（就是在请求的作用域范围内有效，出了这个作用域，对象就销毁了）
+			globalsession（全局的session作用域，一般用于集成开发）
+			
+		一般name属性和id属性只取其一，不要同时使用
+	 -->
+	 
+	<!--  <bean id="aaa" class="cn.oracle.oaec.demo1.Dept">
+	 	<property name="name" value="部门1"></property>
+	 </bean> -->
+	 
+	 
+	 <bean id="aaa" class="cn.oracle.oaec.demo1.Dept" init-method="init" destroy-method="destory">
+	 	<!-- 
+	 		构造注入
+	 		name：参数列表中的名字，必须一致
+	 		value：给基本数据类型包括Stirng赋值,注意，一定要用双引号把数据包起来
+	 		ref：给引用类型赋值
+	 		index:就是参数列表的顺序
+	 	 -->
+	 	<constructor-arg name="name" value="部门1"/>
+	 </bean>
+	 
+	<bean id="p" class="cn.oracle.oaec.demo1.Person" init-method="init" destroy-method="destory"
+		p:score="100" p:age="12" p:name="tom" p:dept-ref="aaa"/>
+		
+	<bean id="p2" class="cn.oracle.oaec.demo1.Person" init-method="init" destroy-method="destory"
+		p:score="100" p:age="12" p:name="tom" p:dept-ref="aaa">
+		<!-- 
+			注入属性
+			name:代表类中的属性名,必须跟属性名一致
+			value：给基本数据类型包括Stirng赋值,注意，一定要用双引号把数据包起来
+			ref：给引用类型赋值
+		 -->
+		<!-- <property name="name" value="张三"></property>
+		<property name="age" value="12"></property>
+		<property name="score" value="100"></property>
+		<property name="dept" ref="aaa"></property> -->
+		
+		<!-- 方式一 （推荐方式）  -->
+		<!-- <constructor-arg name="score" value="100" index=""/>
+		<constructor-arg name="dept" ref="aaa"/>
+		<constructor-arg name="age" value="12"/>
+		<constructor-arg name="name" value="张三"/> -->
+		
+		<!-- 方式二 -->
+		<!-- <constructor-arg index="2" value="100"/>
+		<constructor-arg index="3" ref="aaa"/>
+		<constructor-arg index="1" value="12"/>
+		<constructor-arg index="0" value="张三"/> -->
+	</bean>
+	
+	<bean id="p1" class="cn.oracle.oaec.demo1.Person" init-method="init" destroy-method="destory">
+		<!-- <property name="name" value="#{'张三'}"></property>
+		<property name="age" value="#{'12'}"></property>
+		<property name="score" value="#{'100'}"></property>
+		<property name="dept" ref="#{'aaa'}"></property> -->
+		
+		<!-- 方式一 （推荐方式）  -->
+		<constructor-arg name="score" value="#{'100'}" index=""/>
+		<constructor-arg name="dept" ref="#{'aaa'}"/>
+		<constructor-arg name="age" value="#{'12'}"/>
+		<constructor-arg name="name" value="#{aaa.getName()}"/>
+		
+		<!-- 方式二 -->
+		<!-- <constructor-arg index="2" value="100"/>
+		<constructor-arg index="3" ref="aaa"/>
+		<constructor-arg index="1" value="12"/>
+		<constructor-arg index="0" value="张三"/> -->
+	</bean>
+	
+	
+</beans>

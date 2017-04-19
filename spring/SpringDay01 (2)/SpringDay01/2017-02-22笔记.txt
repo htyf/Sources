@@ -1,0 +1,101 @@
+spirng 的文件管理，通过import标签
+<import resource="cn/oracle/oaec/demo1/entity.xml"/>
+
+1.详细讲解<bean>标签
+	见配置文件entity.xml
+	
+2.di
+	A.属性注入
+	 <bean id="aaa" class="cn.oracle.oaec.demo1.Dept">
+	 	<property name="name" value="部门1"></property>
+	 </bean>
+	 <bean id="p" class="cn.oracle.oaec.demo1.Person">
+		<!-- 
+			注入属性
+			name:代表类中的属性名,必须跟属性名一致
+			value：给基本数据类型包括Stirng赋值,注意，一定要用双引号把数据包起来
+			ref：给引用类型赋值
+		 -->
+		<property name="name" value="张三"></property>
+		<property name="age" value="12"></property>
+		<property name="score" value="100"></property>
+		<property name="dept" ref="aaa"></property>
+	</bean>
+	
+	
+	
+	B.构造方法注入
+	<bean id="aaa" class="cn.oracle.oaec.demo1.Dept">
+	 	<!-- 
+	 		构造注入
+	 		name：参数列表中的名字，必须一致
+	 		value：给基本数据类型包括Stirng赋值,
+	 			注意：一定要用双引号把数据包起来
+	 		ref：给引用类型赋值
+	 		index:就是参数列表的顺序
+	 	 -->
+	 	<constructor-arg name="name" value="部门1"/>
+	 </bean>
+	 <bean id="p" class="cn.oracle.oaec.demo1.Person">
+		<!-- 方式一 （推荐方式）直接根据属性名  -->
+		<!-- <constructor-arg name="score" value="100" index=""/>
+		<constructor-arg name="dept" ref="aaa"/>
+		<constructor-arg name="age" value="12"/>
+		<constructor-arg name="name" value="张三"/> -->
+		
+		<!-- 方式二  根据参数列表中参数对应的下标-->
+		<constructor-arg index="2" value="100"/>
+		<constructor-arg index="3" ref="aaa"/>
+		<constructor-arg index="1" value="12"/>
+		<constructor-arg index="0" value="张三"/>
+	</bean>
+	
+	C. p名称空间注入
+		格式 
+			p:属性名="值"
+			p:属性名-ref="值"
+	
+	dtd约束
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+	<bean id="aaa" class="cn.oracle.oaec.demo1.Dept">
+	<bean id="person1" class="cn.oracle.oaec.demo1.Person"
+		p:score="100" p:age="12" p:name="tom" p:dept-ref="aaa"/>
+	</beans>
+	
+	d.spEL表达式注入
+		它有一个好处是可以调用对象中的方法，并将方法的返回值作为属性的值
+		
+	<bean id="aaa" class="cn.oracle.oaec.demo1.Dept">
+	<bean id="people" class="cn.oracle.oaec.demo1.Person" >
+		<!--属性注入-->
+		<property name="name" value="#{'张三'}"></property>
+		<property name="age" value="#{'12'}"></property>
+		<property name="score" value="#{'100'}"></property>
+		<property name="dept" ref="#{'aaa'}"></property> -->
+		<!--构造方法注入-->
+		<constructor-arg name="score" value="#{'100'}" index=""/>
+		<constructor-arg name="dept" ref="#{'aaa'}"/>
+		<constructor-arg name="age" value="#{'12'}"/>
+		<constructor-arg name="name" value="#{aaa.getName()}"/>
+		
+	</bean>
+	注意点：
+		spring容器中的每一个bean默认情况下是单例的，就是说只要我们通过同一个id来获取对象，
+		那么都是同一个.但是bean与bean之间不存在单例和多例之分
+		（即使他们的类型一致，属性的值一直，也不存在单例或多例的关系）
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
